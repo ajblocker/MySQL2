@@ -1,0 +1,87 @@
+//very easy
+
+// shows total number of orderID, given Alias of OrderId 
+SELECT * FROM Orders;
+SELECT ShipperID from Orders;
+SELECT COUNT(OrderID) AS Orders 
+FROM Orders;
+GROUP BY ShipperID;
+
+
+
+
+
+
+//easy
+
+SELECT * FROM Products;
+//ProductID#38
+Côte de Blaye is the most expensive product available
+SELECT * FROM Products WHERE Price > 100;
+
+//ProductID#33
+Geitost is the cheapest product available
+SELECT * FROM Products WHERE Price < 5;
+
+
+
+
+
+//medium
+
+//shows total number of orderID, given Alias of OrderId 
+SELECT * FROM Orders;
+SELECT ShipperID,
+COUNT(OrderID) AS Orders 
+FROM Orders
+GROUP BY ShipperID;
+
+//shows numbr of customers=89
+SELECT COUNT(DISTINCT CustomerID) AS Customers
+FROM Orders;
+
+
+
+//hard
+
+//shows main supplier if supplier id =1
+SELECT * FROM Products;
+SELECT ProductName,
+    IF(SupplierID=1, "Main Supplier", "Secondary Supplier")
+FROM Products
+GROUP BY ProductName;
+
+//low price=<25, high price=>60, else=medium
+SELECT SupplierID, Price,
+CASE
+    WHEN Price < 25 THEN 'Low Price'
+    WHEN Price > 60 THEN 'High Price'
+ELSE 'Medium Price'
+END AS Prices
+FROM Products;
+
+
+
+
+
+//very hard
+
+//shows employeeid, sum and multiply products and order quantity-alias of total price, and total quantity
+//return records in table even if theres no matching records in the right
+Margaret Peacock shipped the highest amount of products regards to price($275109.98)
+
+SELECT Orders.EmployeeID, SUM(Products.Price * OrderDetails.Quantity) AS Total_Price, Employees.FirstName, Employees.LastName, OrderDetails.Quantity
+FROM Orders
+LEFT JOIN OrderDetails
+ON Orders.OrderID=OrderDetails.OrderID
+LEFT JOIN Products
+ON OrderDetails.ProductID=Products.ProductID
+LEFT JOIN Employees
+ON Orders.EmployeeID=Employees.EmployeeID
+GROUP BY EmployeeID;
+
+        
+
+        
+
+        
