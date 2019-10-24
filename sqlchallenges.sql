@@ -12,7 +12,7 @@ SELECT ShipperID
 FROM Orders;
 
 SELECT COUNT(OrderID) AS Orders 
-FROM Orders;
+FROM Orders
 GROUP BY ShipperID;
 
 
